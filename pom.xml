@@ -11,11 +11,18 @@
 	<groupId>com.example</groupId>
 	<artifactId>school-portal</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
 	<name>school-portal</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
+
+    <modules>
+        <module>person-service</module>
+        <module>school-journal</module>
+    </modules>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
