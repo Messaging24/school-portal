@@ -1,0 +1,39 @@
+.sign-in {
+    width: 368px;
+
+    .ant-card-head-title {
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    .text-input {
+        height: 40px;
+        padding: 5px;
+        border: 1px solid #999;
+        border-radius: 5px;
+        margin-bottom: 1.5rem;
+        outline: none;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .submit-btn {
+        background: #1890ff;
+
+        &:hover span, span {
+            color: #fff;
+            transition: .3s;
+        }
+
+        &:hover {
+            background: #1890ff;
+        }
+    }
+
+    .sign-up-link {
+        text-align: center;
+    }
+}
