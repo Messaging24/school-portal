@@ -33,12 +33,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private AuthEntryPointJwt unauthorizedHandler;
 
-    private static final String DIRECTOR_ENDPOINT = "/api/v1/admin/**";
+    private static final String DIRECTOR_ENDPOINT = "/api/v1/**";
     private static final String USER_ENDPOINT = "/api/v1/auth/**";
+    private static final String TEST_ENDPOINT = "/api/v1/test/**";
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // TODO configure web security
+
         http.csrf().disable().cors()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
@@ -47,14 +48,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(USER_ENDPOINT).hasAnyRole("HEADTEACHER", "TEACHER", "PARENT", "STUDENT", "DIRECTOR")
                 .antMatchers(DIRECTOR_ENDPOINT).hasRole("DIRECTOR")
+                .antMatchers(TEST_ENDPOINT).permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .defaultSuccessUrl("/user", true)  // пока не сделали ниже
-                // TODO.successHandler(...)
-                .permitAll()
+                // TODO  .successHandler(...)
+//                .permitAll()
                 .and()
                 .logout().logoutUrl("/logout")
                 .logoutSuccessUrl("/");//URL-адрес для перенаправления после выхода из системы;
