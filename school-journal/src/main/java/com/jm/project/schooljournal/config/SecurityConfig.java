@@ -1,9 +1,15 @@
 package com.jm.project.schooljournal.config;
 
+import com.jm.project.schooljournal.config.jwt.AuthEntryPointJwt;
+import com.jm.project.schooljournal.config.jwt.AuthTokenFilter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -13,53 +19,49 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // TODO configure authentication manager
 
     }
+    //===============================================================
+    // TODO: Установите управление сеансом.
+    // TODO: Установить обработчик исключений неавторизованных запросов.
+    // TODO: Установите разрешения для конечных точек.
+    // TODO: Добавить фильтр токенов JWT.
 
-// TODO: Установите управление сеансом.
-// TODO: Установить обработчик исключений неавторизованных запросов.
-// TODO: Установите разрешения для конечных точек.
-// TODO: Добавить фильтр токенов JWT.
+    @Bean
+    public AuthTokenFilter authenticationJwtTokenFilter() {
+        return new AuthTokenFilter();
+    }
+
+    @Autowired
+    private AuthEntryPointJwt unauthorizedHandler;
+
+    private static final String DIRECTOR_ENDPOINT = "/api/v1/admin/**";
+    private static final String USER_ENDPOINT = "/api/v1/auth/**";
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // TODO configure web security
-        http
-                // TODO: 18.10.2021 Включите CORS и отключите CSRF
-                .csrf().disable()
-                .cors()
+        http.csrf().disable().cors()
                 .and()
-
-                // TODO: Установите управление сеансом.
+                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
                 .authorizeRequests()
-                .antMatchers("/user/**").access("hasAnyRole('HEADTECHER','TEACHER','PARENT','STUDENT','DIRECTOR')")
-
-                .antMatchers("/**").access("hasAnyRole('DIRECTOR')")
-
+                .antMatchers(USER_ENDPOINT).hasAnyRole("HEADTEACHER", "TEACHER", "PARENT", "STUDENT", "DIRECTOR")
+                .antMatchers(DIRECTOR_ENDPOINT).hasRole("DIRECTOR")
                 .and()
-                // TODO: Установить обработчик исключений неавторизованных запросов.
-                // TODO to build classes SimpleAccessDeniedHandler and SimpleAuthenticationEntryPoint
-//                .exceptionHandling().accessDeniedHandler(new SimpleAccessDeniedHandler()).authenticationEntryPoint(new SimpleAuthenticationEntryPoint())
-
-                .formLogin()  // Spring сам подставит свою логин форму
-//                .loginProcessingUrl("/j_spring_security_check")
+                .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/user", true)
-
-                .failureUrl("/login?error=true")
                 .usernameParameter("email")
-//                .passwordParameter("password")
-                // TODO
-                // .successHandler()// подключаем наш SuccessHandler для перенеправления по ролям
+                .passwordParameter("password")
+                .defaultSuccessUrl("/user", true)  // пока не сделали ниже
+                // TODO.successHandler(...)
                 .permitAll()
-// TODO  Добавить фильтр токенов JWT.
-//            .and()
-//            .oauth2ResourceServer().jwt() далее конфигурация
-
                 .and()
-                .logout()
-                .logoutUrl("/logout") //URL-адрес, запускающий выход из системы (по умолчанию "/ logout").
-                .logoutSuccessUrl("/");//URL-адрес для перенаправления после выхода из системы
-    }
+                .logout().logoutUrl("/logout")
+                .logoutSuccessUrl("/");//URL-адрес для перенаправления после выхода из системы;
 
+        // Добавил фильтр токенов JWT.
+        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+    }
 
 //    @Bean
 //    public CorsConfigurationSource corsConfigurationSource() {
