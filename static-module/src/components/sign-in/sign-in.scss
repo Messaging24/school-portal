@@ -1,0 +1,79 @@
+
+
+.sign-in {
+    width: 368px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+
+    .ant-card-head-title {
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    .text-input {
+        height: 40px;
+        padding: 5px;
+        border: 1px solid #999;
+        border-radius: 5px;
+        outline: none;
+        margin-top: .125rem;
+    }
+
+    .input--error {
+        outline: 1px;
+        outline-color: #F5222D;
+        border: 1px solid #F5222D;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+
+        label {
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+
+            p {
+                position: absolute;
+                bottom: -35px;
+                color: #F5222D
+            }
+
+            &:last-child {
+                padding-bottom: 1.5rem;
+                border-bottom: 1px solid #e5e5e5;
+                margin-bottom: 1rem;
+
+               p {
+                    bottom: -10px;
+                }
+            }
+        }
+    }
+
+    .submit-btn {
+        background: #1890ff;
+        border-radius: 5px;
+
+        &:hover span, span {
+            color: #fff;
+            transition: .3s;
+        }
+
+        &:hover {
+            background: #1890ff;
+        }
+    }
+
+    .sign-up-link {
+        text-align: center;
+    }
+
+    .ant-btn::before {
+        display: none;
+    }
+    .ant-btn:focus {
+        background: #1890ff;
+    }
+}
