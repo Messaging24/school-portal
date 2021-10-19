@@ -6,7 +6,6 @@ import { stateFromStore } from '../../typescript/types';
 
 
 import Header from '../header';
-import Main from '../main';
 import SignIn from '../sign-in';
 
 import './app.scss';
@@ -27,8 +26,6 @@ function App({isLoggedIn}:any) {
             )
           }}/>
         <Route path="/sign-in" exact component={SignIn}/>
-        <Route path="/home" exact component={Main}/>
-        
       </div>
     </Router>
   );
