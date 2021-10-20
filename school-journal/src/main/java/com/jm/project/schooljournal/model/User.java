@@ -11,13 +11,11 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(userName = "uuid", unique = true)
-    private int uuid;
+    @Column(email = "uuid", unique = true)
+    private String uuid;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+    @Column(name = "userName")
+    private String userName;
 
     @Column(name = "name")
     private String name;
@@ -34,14 +32,21 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
-    public User(int uuid, Set<Role> role, String name, String soname, String secondname, int age, String password) {
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
+
+    public User(String uuid, String userName, String name, String soname, String secondname, int age, String password, Set<Role> roles) {
         this.uuid = uuid;
-        this.role = role;
+        this.userName = userName;
         this.name = name;
         this.soname = soname;
         this.secondname = secondname;
         this.age = age;
         this.password = password;
+        this.roles = roles;
     }
 }
+
 
