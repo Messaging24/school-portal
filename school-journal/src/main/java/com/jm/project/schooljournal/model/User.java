@@ -2,7 +2,6 @@ package com.jm.project.schooljournal.model;
 
 import lombok.Data;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.unbescape.properties.PropertiesKeyEscapeLevel;
 
 import javax.persistence.*;
 
@@ -46,3 +45,4 @@ public class User implements UserDetails {
         this.password = password;
     }
 }
+
