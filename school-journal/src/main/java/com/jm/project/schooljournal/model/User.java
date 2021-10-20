@@ -12,7 +12,7 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(email = "uuid", unique = true)
+    @Column(userName = "uuid", unique = true)
     private int uuid;
 
     @ManyToMany(fetch = FetchType.LAZY)
