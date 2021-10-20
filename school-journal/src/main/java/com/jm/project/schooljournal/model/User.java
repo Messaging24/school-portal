@@ -1,11 +1,9 @@
 package com.jm.project.schooljournal.model;
 
-import lombok.Data;
 import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 
 @Entity
-@Data
 @Table(name = "users")
 public class User implements UserDetails {
 
@@ -35,15 +33,10 @@ public class User implements UserDetails {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+    private Set<RoleModel> roles;
 
-    public User(String uuid, String userName, String name, String soname, String secondname, int age, String password, Set<Role> roles) {
-        this.uuid = uuid;
+    public User(String userName, String password, Set<Role> roles) {
         this.userName = userName;
-        this.name = name;
-        this.soname = soname;
-        this.secondname = secondname;
-        this.age = age;
         this.password = password;
         this.roles = roles;
     }
