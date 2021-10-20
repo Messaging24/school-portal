@@ -5,8 +5,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 @EnableWebSecurity
@@ -20,24 +18,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        // TODO configure authentication manager
-        auth.userDetailsService(new UserDetailsService() {
-            @Override
-            public UserDetails loadUserByUsername(String username)
-                    throws UsernameNotFoundException {
-                //Ищем юзера в бд
-                User user = userRepository.findUserByUsername(username);
-                if (user != null) {
-                    //Если нашли, возвращаем UserDetails
-                    return new org.springframework.security.core.userdetails.User(
-                            user.getUsername(),
-                            user.getPassword(),
-                            user.getAuthorities()
-                    );
-                }
-                //Если не нашли, бросаем исключение
-                throw new UsernameNotFoundException("User '" + username + "' not exists");
+        auth.userDetailsService(username -> {
+            User user = userRepository.findUserByUsername(username);
+            if (user != null) {
+                return new org.springframework.security.core.userdetails.User(
+                        user.getUsername(),
+                        user.getPassword(),
+                        user.getAuthorities()
+                );
             }
+            throw new UsernameNotFoundException("User '" + username + "' not exists");
         });
     }
 
