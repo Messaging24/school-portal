@@ -2,6 +2,8 @@ package com.jm.project.schooljournal.model;
 
 import lombok.Data;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.unbescape.properties.PropertiesKeyEscapeLevel;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,8 +16,10 @@ public class User implements UserDetails {
     @Column(email = "uuid", unique = true)
     private int uuid;
 
-    @Column(role = "role")
-    private int role;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
 
     @Column(name = "name")
     private String name;
@@ -32,7 +36,7 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
-    public User(int uuid, String role, String name, String soname, String patronymic, int age, String password) {
+    public User(int uuid, Set<Role> role, String name, String soname, String patronymic, int age, String password) {
         this.uuid = uuid;
         this.role = role;
         this.name = name;
