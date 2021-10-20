@@ -2,7 +2,6 @@ package com.jm.project.schooljournal.model;
 
 import lombok.Data;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
 
 @Entity
