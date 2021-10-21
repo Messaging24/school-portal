@@ -1,8 +1,9 @@
 package com.jm.project.schooljournal.model;
 
 import org.springframework.security.core.userdetails.UserDetails;
+import javax.management.relation.Role;
 import javax.persistence.*;
-
+import java.util.Set;
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
@@ -35,11 +36,9 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<RoleModel> roles;
 
-    public User(String userName, String password, Set<Role> roles) {
+    public User(String userName, String password, Set<RoleModel> roles) {
         this.userName = userName;
         this.password = password;
         this.roles = roles;
     }
 }
-
-
