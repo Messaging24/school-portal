@@ -3,8 +3,8 @@ package com.example.personservice.model;
 public abstract class Person {
 
     private String firstName;
-    private String surName;
-    private String patronymic;
+    private String lastName;
+    private String secondName;
     private char gender;
     private int age;
 
@@ -16,20 +16,20 @@ public abstract class Person {
         this.firstName = firstName;
     }
 
-    public String getSurName() {
-        return surName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setSurName(String surName) {
-        this.surName = surName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getPatronymic() {
-        return patronymic;
+    public String getSecondName() {
+        return secondName;
     }
 
-    public void setPatronymic(String patronymic) {
-        this.patronymic = patronymic;
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
     }
 
     public char getGender() {
