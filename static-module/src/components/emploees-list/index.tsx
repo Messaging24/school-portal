@@ -30,6 +30,7 @@ const mockupEmploees: person[] = [
         userStatus:'Учитель', 
         uuid: 'uuid4'
     },
+    
 ]
 
 const emploeeActions:string[] = ['Подробнее', 'Уволить', 'Отправить сообщение']
