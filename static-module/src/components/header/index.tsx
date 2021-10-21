@@ -5,7 +5,10 @@ const Header = () => {
     return (
         <header>
             <div className="header-wrapper">
-                <title>Школьный Портал</title>
+                <title>
+                    <h1>Школьный Портал</h1>
+                    <h3>МБОУ СОШ №37</h3>
+                </title>
             </div>   
         </header>
     )

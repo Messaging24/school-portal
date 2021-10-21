@@ -1,0 +1,46 @@
+.my-burger-btn.ant-btn{
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    font-size: 1rem;
+    line-height: 1rem;
+    border: none;
+    box-shadow: none;
+
+    .menu-btn_dash {
+        content: "";
+        width: 30px;
+        height: 3px;
+        background: #1890ff;
+        margin: 0;
+        transition: .3s;
+
+        &:first-child {
+            margin-bottom: 7px;
+        }
+
+        &:last-child {
+            margin-top: 7px;
+        }
+   }
+
+   .menu-btn_dash--active:first-child {
+       display: none;
+   }
+
+   .menu-btn_dash--active {
+       
+       width: 40px;
+       transform: rotate(45deg);
+       margin: 0;
+       bottom: 5px;
+   }
+   .menu-btn_dash--active:last-child {
+    position: absolute;
+    transform: rotate(-45deg);
+    margin: 0;
+    bottom: 17px;
+    
+    }
+}    
