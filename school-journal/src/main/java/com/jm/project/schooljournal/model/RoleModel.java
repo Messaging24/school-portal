@@ -3,6 +3,7 @@ package com.jm.project.schooljournal.model;
 
 import org.springframework.security.core.GrantedAuthority;
 
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -50,6 +51,7 @@ public class RoleModel implements GrantedAuthority{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RoleModel roleModel = (RoleModel) o;
+        //TODO
         return id == roleModel.id && Objects.equals(role, roleModel.role);
     }
 
