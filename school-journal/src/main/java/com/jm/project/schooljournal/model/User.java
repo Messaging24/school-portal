@@ -18,18 +18,6 @@ public class User implements UserDetails {
     @Column(name = "userName")
     private String userName;
 
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "soname")
-    private String soname;
-
-    @Column(name = "secondname")
-    private String secondname;
-
-    @Column(name = "age")
-    private int age;
-
     @Column(name = "password")
     private String password;
 
