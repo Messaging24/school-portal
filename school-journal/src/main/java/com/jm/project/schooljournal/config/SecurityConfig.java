@@ -1,6 +1,7 @@
 package com.jm.project.schooljournal.config;
 
 import com.jm.project.schooljournal.model.User;
+import com.jm.project.schooljournal.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
