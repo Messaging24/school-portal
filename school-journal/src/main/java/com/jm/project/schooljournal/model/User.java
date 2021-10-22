@@ -5,7 +5,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Set;
-
 @Entity
 @Table(name = "user")
 public class User implements UserDetails {
@@ -33,6 +32,8 @@ public class User implements UserDetails {
     }
     public User() {
     }
+
+    public String getUserName() { return userName; }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() { return null; }
