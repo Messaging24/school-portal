@@ -12,21 +12,22 @@ public class Student extends Person {
 
     @OneToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
-    public Form school_class;
+    public Form form;
 
     public Student() {
     }
 
-    public Student(String firstName, String secondName, String lastName, char gender, int age) {
+    public Student(String firstName, String secondName, String lastName, char gender, int age, Form form) {
         super(firstName, secondName, lastName, gender, age);
+        this.form = form;
     }
 
-    public Form getSchool_class() {
-        return school_class;
+    public Form getForm() {
+        return form;
     }
 
-    public void setSchool_class(Form school_class) {
-        this.school_class = school_class;
+    public void setForm(Form school_class) {
+        this.form = school_class;
     }
 
     @Override
