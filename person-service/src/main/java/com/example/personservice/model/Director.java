@@ -1,6 +1,7 @@
 package com.example.personservice.model;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -12,10 +13,10 @@ public class Director extends Person {
     private Long id;
 
     @Column
-    private int startManagement;
+    private Date startManagement;
 
     @Column
-    private int endManagement;
+    private Date endManagement;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "director_school", joinColumns = @JoinColumn(name = "director_id"),
@@ -26,12 +27,9 @@ public class Director extends Person {
     }
 
     public Director(School school, String firstName, String lastName, String secondName, char gender, int age) {
-        super.setFirstName(firstName);
-        super.setLastName(lastName);
-        super.setSecondName(secondName);
-        super.setGender(gender);
-        super.setAge(age);
+        super(firstName, lastName, secondName, gender, age);
         this.school = school;
+
     }
 
     public School getSchool() {
@@ -42,19 +40,19 @@ public class Director extends Person {
         this.school = school;
     }
 
-    public int getStartManagement() {
+    public Date getStartManagement() {
         return startManagement;
     }
 
-    public void setStartManagement(int startManagement) {
+    public void setStartManagement(Date startManagement) {
         this.startManagement = startManagement;
     }
 
-    public int getEndManagement() {
+    public Date getEndManagement() {
         return endManagement;
     }
 
-    public void setEndManagement(int endManagement) {
+    public void setEndManagement(Date endManagement) {
         this.endManagement = endManagement;
     }
 
