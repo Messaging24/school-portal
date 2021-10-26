@@ -14,7 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final UserRepository userRepository;
+    private UserRepository userRepository;
 
     public SecurityConfig(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -32,12 +32,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 );
             }
             throw new UsernameNotFoundException("User '" + username + "' not exists");
-        });
+            // TODO !!!
+        }).passwordEncoder(passwordEncoder());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // TODO configure web security
+
+
+
     }
     @Bean
     public PasswordEncoder passwordEncoder() {
