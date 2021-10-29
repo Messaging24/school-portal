@@ -1,0 +1,50 @@
+.home {
+    width: 1200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 5%;
+
+    a {
+        display: block;
+        margin: .5rem;
+    }
+
+    .home__card {
+        border: none;
+        padding: 0;
+        width: 268px;
+        height: 320px;
+        box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        border-radius: 5px;
+
+        .ant-card-body {
+            padding: 0;
+            display: flex;
+            min-width: 100%;
+            min-height: 100%;
+            align-items: center;
+            justify-content: center;
+            transition: .5s;
+
+            &:hover {
+                background-color: rgba(0, 0, 0, 0.7);
+            }
+
+            h3 {
+                display: block;
+                font-size: 1.3rem;
+                line-height: 60px;
+                text-align: center;
+                width: 100%;
+                height: 60px;
+                color: #fff;
+                background: rgba(46, 139, 87, .75);
+            }
+        }
+    }
+}
+
