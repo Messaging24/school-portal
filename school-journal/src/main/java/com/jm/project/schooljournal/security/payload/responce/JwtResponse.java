@@ -44,7 +44,6 @@ public class JwtResponse {
         this.id = id;
     }
 
-
     public String getUsername() {
         return username;
     }

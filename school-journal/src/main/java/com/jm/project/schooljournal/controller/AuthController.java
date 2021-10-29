@@ -99,19 +99,19 @@ public class AuthController {
                 switch (role) {
                     case "admin":
                         RoleModel adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                                .orElseThrow(() -> new RuntimeException("Error: Role ADMIN is not found."));
                         roles.add(adminRole);
 
                         break;
                     case "mod":
                         RoleModel modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                                .orElseThrow(() -> new RuntimeException("Error: Role MODERATOR is not found."));
                         roles.add(modRole);
 
                         break;
                     default:
                         RoleModel userRole = roleRepository.findByName(ERole.ROLE_USER)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                                .orElseThrow(() -> new RuntimeException("Error: Role USER is not found."));
                         roles.add(userRole);
                 }
             });
