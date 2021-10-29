@@ -10,7 +10,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users_role")
-public class RoleModel implements GrantedAuthority {
+public class RoleModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,22 +18,14 @@ public class RoleModel implements GrantedAuthority {
     private Long id;
 
     @Column(name = "role")
-    private String role;
+    private ERole name;
 
-    @JsonIgnore
-    @ManyToMany(mappedBy = "roles")
-    private Set<User> users;
+//    @JsonIgnore
+//    @ManyToMany(mappedBy = "roles")
+//    private Set<User> users;
 
-    public RoleModel(Set<User> users) {
-        this.users = users;
-    }
-
-    public RoleModel(String role, Set<User> users) {
-        this.role = role;
-        this.users = users;
-    }
-
-    public RoleModel() {
+    public RoleModel(ERole name) {
+        this.name = name;
     }
 
     public Long getId() {
@@ -44,37 +36,65 @@ public class RoleModel implements GrantedAuthority {
         this.id = id;
     }
 
-    public String getRole() {
-        return role;
+    public ERole getName() {
+        return name;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setName(ERole name) {
+        this.name = name;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        RoleModel roleModel = (RoleModel) o;
-        //TODO
-        return id == roleModel.id && Objects.equals(role, roleModel.role);
+//    public RoleModel(Set<User> users) {
+//        this.users = users;
+//    }
+//
+//    public RoleModel(String role, Set<User> users) {
+//        this.role = role;
+//        this.users = users;
+//    }
+
+    public RoleModel() {
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, role);
-    }
-
-    @Override
-    public String toString() {
-        return "Role: " + this.id + " " + this.role;
-    }
-
-    @Override
-    public String getAuthority() {
-        return getRole();
-    }
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
+//
+//    public String getRole() {
+//        return role;
+//    }
+//
+//    public void setRole(String role) {
+//        this.role = role;
+//    }
+//
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        RoleModel roleModel = (RoleModel) o;
+//        //TODO
+//        return id == roleModel.id && Objects.equals(role, roleModel.role);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(id, role);
+//    }
+//
+//    @Override
+//    public String toString() {
+//        return "Role: " + this.id + " " + this.role;
+//    }
+//
+//    @Override
+//    public String getAuthority() {
+//        return getRole();
+//    }
 
 }
 

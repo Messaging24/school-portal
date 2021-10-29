@@ -1,6 +1,7 @@
 package com.jm.project.schooljournal.controller;
 
 import com.jm.project.schooljournal.exception.TokenRefreshException;
+import com.jm.project.schooljournal.model.ERole;
 import com.jm.project.schooljournal.model.RefreshToken;
 import com.jm.project.schooljournal.model.RoleModel;
 import com.jm.project.schooljournal.model.User;
@@ -89,27 +90,27 @@ public class AuthController {
         Set<String> stringRoles = signUpRequest.getRole();
         Set<RoleModel> roles = new HashSet<>();
 
-        if (stringRoles == null) {
-            RoleModel userRole = roleRepository.findByRole(new RoleModel())
+        if (stringRoles == null) {   // TODO изменил поиск  ролей на enum
+            RoleModel userRole = roleRepository.findByName(ERole.ROLE_USER)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
             roles.add(userRole);
         } else {
             stringRoles.forEach(role -> {
                 switch (role) {
                     case "admin":
-                        RoleModel adminRole = roleRepository.findByRole(new RoleModel())
+                        RoleModel adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(adminRole);
 
                         break;
                     case "mod":
-                        RoleModel modRole = roleRepository.findByRole(new RoleModel())
+                        RoleModel modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(modRole);
 
                         break;
                     default:
-                        RoleModel userRole = roleRepository.findByRole(new RoleModel())
+                        RoleModel userRole = roleRepository.findByName(ERole.ROLE_USER)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(userRole);
                 }
