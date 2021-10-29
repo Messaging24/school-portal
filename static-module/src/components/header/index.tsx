@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import './header.scss'
 
 
@@ -6,8 +7,9 @@ const Header = () => {
         <header>
             <div className="header-wrapper">
                 <title>
-                    <h1>Школьный Портал</h1>
-                    <h3>МБОУ СОШ №37</h3>
+                    <Link to="/home">
+                        <h1>Школьный Портал</h1>
+                    </Link>
                 </title>
             </div>   
         </header>
