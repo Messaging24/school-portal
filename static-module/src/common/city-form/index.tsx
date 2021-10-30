@@ -45,6 +45,7 @@ const CityForm = ({setCity} : {setCity?:any}) => {
 }
 
 const mapState = (state:stateFromStore) => ({})
+
 const mapDispatch = (dispatch: Dispatch<AnyAction>) => {
     const bound = bindActionCreators({setCity}, dispatch)
     return {
