@@ -19,10 +19,13 @@ const appSlice = createSlice({
     setCity: (state, action) => {
       state.city = action.payload
     },
+    setIsLoggedIn: (state, action) => {
+      state.isLoggedIn = action.payload
+    },
   },
   extraReducers: {
   },
 })
 
-export const { setCity } = appSlice.actions
+export const { setCity, setIsLoggedIn } = appSlice.actions
 export default appSlice.reducer
