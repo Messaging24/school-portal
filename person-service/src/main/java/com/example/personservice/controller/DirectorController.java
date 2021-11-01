@@ -27,19 +27,19 @@ public class DirectorController {
     }
 
     @GetMapping("director/{id}")
-    public ResponseEntity<Director> getDirectorById(long id) {
+    public ResponseEntity<Director> getDirectorById(@PathVariable long id) {
         Director director = directorService.getDirectorById(id);
         return new ResponseEntity<>(director, HttpStatus.OK);
     }
 
     @PostMapping("director")
-    public ResponseEntity<Director> addDirector(Director director) {
+    public ResponseEntity<Director> addDirector(@RequestBody Director director) {
         directorService.addDirector(director);
         return new ResponseEntity<>(director, HttpStatus.OK);
     }
 
     @PutMapping("director")
-    public ResponseEntity<Director> updateDirector(Director director) {
+    public ResponseEntity<Director> updateDirector(@RequestBody Director director) {
         directorService.updateDirector(director);
         return new ResponseEntity<>(director, HttpStatus.OK);
     }
