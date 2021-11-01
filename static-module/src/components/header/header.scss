@@ -1,14 +1,37 @@
 header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100px;
-    background: rgb(46, 139, 87, .75);
+    background: #2e8b57;
 
     .header-wrapper {
         width: 1200px;
+        display: flex;
+        justify-content: center;
+        position: relative;
+
         
+        }
+        .header-nav {
+            display: flex;
+            position: absolute;
+            right: 0;
+
+            button {
+                border-radius: 5px;
+            }
+
+            .sign-up-btn {
+                margin: 0 3rem 0 1rem;
+            }
+            .sign-out-btn {
+                margin-right: 3rem;
+            }
     }
 
     title {
@@ -29,7 +52,10 @@ header {
             margin: 0;
         }
         
-
+        a {
+            display: block;
+            text-align: center;
+        }
         @media (max-width: 400px) {
             font-size: 1.75rem;
         }

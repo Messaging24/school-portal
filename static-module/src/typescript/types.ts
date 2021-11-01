@@ -6,9 +6,9 @@ export interface stateFromStore {
 
 export interface appState {
     isLoggedIn: boolean,
-    currentPage: string,
     currentUser: user,
     serverErrors: string[] | false,
+    city: string | false,
 }
 
 export interface lcPageState {

@@ -1,7 +1,8 @@
-.lc-container {
+.lc-container.ant-card {
     width: 1200px;
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
     min-height: 50vh;
+    margin-top: 2.5%;
 
     .lc-header {
         background: rgb(46, 139, 87, .75);

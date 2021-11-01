@@ -1,25 +1,35 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Button, Card } from "antd"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
+import { AnyAction, bindActionCreators, Dispatch } from "redux";
 import { stateFromStore, user } from "../../typescript/types";
+import { setIsLoggedIn } from "../app/appSlice";
 
 import './sign-in.scss'
 
-const SignIn = ({serverErrors, currentUser}:
+const SignIn = ({serverErrors, currentUser, setIsLoggedIn}:
     {
         serverErrors: string[] | false,
         currentUser: user,
+        setIsLoggedIn: any,
     }
     ) => {
     const { register, handleSubmit, formState: { errors }} = useForm();
     const [success, setSuccess] = useState(false)
 
     const onSubmit = (data:any) => {
-        console.log(data)
-        !serverErrors && setSuccess(true)
+        !serverErrors && setSuccess(true) 
       };
+
+    useEffect(() => {
+        if (success) {
+            setIsLoggedIn(true)
+        }
+    },[success])
+
     return (
         <>
             {success && <Redirect to={`/${currentUser.position}/lc-page`}/>}
@@ -64,5 +74,12 @@ const mapState = (state:stateFromStore) => ({
     currentUser: state.app.currentUser,
 })
 
+const mapDispatch = (dispatch: Dispatch<AnyAction>) => {
+    const bound = bindActionCreators({setIsLoggedIn}, dispatch);
+    return {
+        setIsLoggedIn: bound.setIsLoggedIn,
+    }
+}
 
-export default connect(mapState)(SignIn)
+
+export default connect(mapState, mapDispatch)(SignIn)
