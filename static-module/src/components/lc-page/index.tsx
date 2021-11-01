@@ -1,4 +1,4 @@
-import { Button, Card, Radio } from "antd"
+import { Card, Radio } from "antd"
 import { useState } from "react"
 import { connect } from "react-redux"
 import { Redirect } from "react-router"
@@ -25,7 +25,6 @@ const LcPage = ({
         const cardHeader = 
             <header className="lc-header">
                 <h2>Кабинет директора</h2>
-                <Button size="large" className="logout-btn">Выйти</Button>
             </header>
 
         
