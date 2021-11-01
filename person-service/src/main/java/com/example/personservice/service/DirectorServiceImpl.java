@@ -14,7 +14,7 @@ public class DirectorServiceImpl implements DirectorService {
     DirectorRepository directorRepository;
 
     @Autowired
-    public void setDirectorRepository(DirectorRepository directorRepository) {
+    public DirectorServiceImpl(DirectorRepository directorRepository) {
         this.directorRepository = directorRepository;
     }
 

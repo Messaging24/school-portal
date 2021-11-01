@@ -16,8 +16,13 @@ public class School {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "director")
-    @OneToOne(fetch = FetchType.EAGER)
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "number")
+    private int number;
+
+    @OneToOne(mappedBy = "school")
     private Director director;
 
     public School() {
@@ -42,5 +47,21 @@ public class School {
 
     public void setDirector(Director director) {
         this.director = director;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public long getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
     }
 }
