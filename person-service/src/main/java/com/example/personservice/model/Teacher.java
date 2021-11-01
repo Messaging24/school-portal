@@ -1,7 +1,9 @@
 package com.example.personservice.model;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "teachers")
@@ -11,20 +13,22 @@ public class Teacher extends Person {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @OneToMany(mappedBy = "id",
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
-    private List<Classes> classesList;
+//    @OneToMany(mappedBy = "id",
+//            fetch = FetchType.LAZY,
+//            cascade = CascadeType.ALL,
+//            orphanRemoval = true)
+//    private List<Classes> classesList;
 
     public Teacher() {
 
     }
 
-    public Teacher(String firstName, String lastName, String secondName, char gender, int age, Long id, List<Classes> classesList) {
+    public Teacher(String firstName, String lastName, String secondName, char gender, int age, Long id
+//            ,List<Classes> classesList
+    ) {
         super(firstName, lastName, secondName, gender, age);
         this.id = id;
-        this.classesList = classesList;
+//        this.classesList = classesList;
     }
 
     public Long getId() { return id; }
