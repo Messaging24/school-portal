@@ -1,6 +1,7 @@
 package com.example.personservice.service;
 
-import com.example.personservice.model.School;
+
+import com.example.personservice.model.schoolattributes.School;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +23,5 @@ public interface SchoolService {
     School getSchoolByNumber(int number);
 
     List<School> getAllSchools();
-
 
 }

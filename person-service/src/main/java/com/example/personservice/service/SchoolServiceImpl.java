@@ -1,11 +1,14 @@
 package com.example.personservice.service;
 
-import com.example.personservice.model.School;
+
+import com.example.personservice.model.schoolattributes.School;
 import com.example.personservice.repository.SchoolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class SchoolServiceImpl implements SchoolService {
 
     SchoolRepository schoolRepository;
