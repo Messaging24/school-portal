@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping(value = "/")
 public class SchoolController {
 
-    SchoolService schoolService;
+    private SchoolService schoolService;
 
     @Autowired
     public SchoolController(SchoolService schoolService) {
@@ -43,24 +43,24 @@ public class SchoolController {
         return new ResponseEntity<>(school, HttpStatus.OK);
     }
 
-    @PostMapping("school")
+    @PostMapping("school/add")
     public ResponseEntity<School> addSchool(@RequestBody School school) {
         schoolService.addSchool(school);
         return new ResponseEntity<>(school, HttpStatus.OK);
     }
 
-    @PutMapping("school")
+    @PutMapping("school/edit")
     public ResponseEntity<School> updateDirector(@RequestBody School school) {
         schoolService.updateSchool(school);
         return new ResponseEntity<>(school, HttpStatus.OK);
     }
 
-    @DeleteMapping("school")
+    @DeleteMapping("school/delete/id")
     public ResponseEntity<School> deleteSchool(long id) {
         schoolService.deleteSchoolById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    @DeleteMapping("school")
+    @DeleteMapping("school/delete")
     public ResponseEntity<School> deleteSchoolByAddress(String address) {
         schoolService.deleteSchoolByAddress(address);
         return new ResponseEntity<>(HttpStatus.OK);
