@@ -15,8 +15,8 @@ public class School {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "address")
-    private String address;
+    @OneToOne(mappedBy = "school")
+    private Address address;
 
     @Column(name = "number")
     private int number;
@@ -48,11 +48,11 @@ public class School {
         this.director = director;
     }
 
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 
