@@ -1,6 +1,6 @@
-package com.example.personservice.service;
+package com.example.personservice.service.schoolatribute_services;
 
-import com.example.personservice.model.School;
+import com.example.personservice.model.schoolattributes.School;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

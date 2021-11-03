@@ -1,6 +1,6 @@
-package com.example.personservice.repository;
+package com.example.personservice.repository.schoolatribute_repository;
 
-import com.example.personservice.model.School;
+import com.example.personservice.model.schoolattributes.School;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

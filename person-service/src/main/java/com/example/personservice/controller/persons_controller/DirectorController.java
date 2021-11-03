@@ -1,7 +1,7 @@
-package com.example.personservice.controller;
+package com.example.personservice.controller.persons_controller;
 
-import com.example.personservice.model.Director;
-import com.example.personservice.service.DirectorService;
+import com.example.personservice.model.persons.Director;
+import com.example.personservice.service.persons_services.DirectorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

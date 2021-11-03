@@ -1,12 +1,13 @@
-package com.example.personservice.service;
+package com.example.personservice.service.persons_services.impl;
 
-import com.example.personservice.model.Student;
-import com.example.personservice.repository.StudentRepository;
+import com.example.personservice.model.persons.Student;
+import com.example.personservice.repository.persons_repository.StudentRepository;
+import com.example.personservice.service.persons_services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-public class StudentServiceImpl implements StudentService{
+public class StudentServiceImpl implements StudentService {
 
     StudentRepository studentRepository;
 

@@ -1,5 +1,5 @@
-package com.example.personservice.service;
-import com.example.personservice.model.Parent;
+package com.example.personservice.service.persons_services;
+import com.example.personservice.model.persons.Parent;
 import java.util.List;
 
 public interface ParentService {

@@ -1,7 +1,8 @@
-package com.example.personservice.service;
+package com.example.personservice.service.persons_services.impl;
 
-import com.example.personservice.model.Parent;
-import com.example.personservice.repository.ParentRepository;
+import com.example.personservice.model.persons.Parent;
+import com.example.personservice.repository.persons_repository.ParentRepository;
+import com.example.personservice.service.persons_services.ParentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

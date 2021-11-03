@@ -1,12 +1,13 @@
-package com.example.personservice.service;
+package com.example.personservice.service.persons_services.impl;
 
-import com.example.personservice.model.Director;
+import com.example.personservice.model.persons.Director;
+import com.example.personservice.service.persons_services.DirectorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import com.example.personservice.repository.DirectorRepository;
+import com.example.personservice.repository.persons_repository.DirectorRepository;
 
 @Service
 public class DirectorServiceImpl implements DirectorService {

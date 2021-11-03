@@ -1,6 +1,6 @@
-package com.example.personservice.service;
+package com.example.personservice.service.persons_services;
 
-import com.example.personservice.model.Director;
+import com.example.personservice.model.persons.Director;
 
 import java.util.List;
 

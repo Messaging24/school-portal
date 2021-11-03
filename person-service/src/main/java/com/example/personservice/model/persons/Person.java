@@ -1,4 +1,4 @@
-package com.example.personservice.model;
+package com.example.personservice.model.persons;
 
 public abstract class Person {
 

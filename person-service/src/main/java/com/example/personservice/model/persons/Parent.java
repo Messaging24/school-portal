@@ -1,4 +1,4 @@
-package com.example.personservice.model;
+package com.example.personservice.model.persons;
 
 //TODO унаследовать от Person
 //  Добавить связку родитель ученик (OneToMany)

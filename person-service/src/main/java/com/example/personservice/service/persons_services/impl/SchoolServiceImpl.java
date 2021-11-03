@@ -1,7 +1,8 @@
-package com.example.personservice.service;
+package com.example.personservice.service.persons_services.impl;
 
-import com.example.personservice.model.School;
-import com.example.personservice.repository.SchoolRepository;
+import com.example.personservice.model.schoolattributes.School;
+import com.example.personservice.repository.schoolatribute_repository.SchoolRepository;
+import com.example.personservice.service.schoolatribute_services.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
