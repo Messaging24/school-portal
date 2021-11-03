@@ -1,5 +1,7 @@
 package com.example.personservice.model.persons;
 
+import com.example.personservice.model.schoolattributes.Form;
+
 import javax.persistence.*;
 
 @Entity
