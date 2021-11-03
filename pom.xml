@@ -20,7 +20,7 @@
 
     <modules>
         <module>person-service</module>
-        <module>school-journal</module>
+        <module>security-journal</module>
     </modules>
 
 	<dependencies>
