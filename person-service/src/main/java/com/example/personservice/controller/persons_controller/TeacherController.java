@@ -32,19 +32,19 @@ public class TeacherController {
         return new ResponseEntity<>(teacher, HttpStatus.OK);
     }
 
-    @PostMapping("teacher")
+    @PostMapping("teacher/add")
     public ResponseEntity<Teacher> addTeacher(@RequestBody Teacher teacher) {
         teacherService.addTeacher(teacher);
         return new ResponseEntity<>(teacher, HttpStatus.OK);
     }
 
-    @PutMapping("teacher")
+    @PutMapping("teacher/edit")
     public ResponseEntity<Teacher> updateTeacher(@RequestBody Teacher teacher) {
         teacherService.updateTeacher(teacher);
         return new ResponseEntity<>(teacher, HttpStatus.OK);
     }
 
-    @DeleteMapping("teacher")
+    @DeleteMapping("teacher/delete")
     public ResponseEntity<Teacher> deleteTeacher(long id) {
         teacherService.deleteTeacherById(id);
         return new ResponseEntity<>(HttpStatus.OK);
