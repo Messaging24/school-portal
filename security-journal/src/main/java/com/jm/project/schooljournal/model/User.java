@@ -13,11 +13,11 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue
-    @Column(name = "uuid", unique = true)
+    @Column(name = "uuid")
     private UUID uuid;
 
-    @Column(name = "userName")
-    private String userName;
+    @Column(name = "username")
+    private String username;
 
     @Column(name = "password")
     private String password;
@@ -28,14 +28,12 @@ public class User implements UserDetails {
     private Set<RoleModel> roles;
 
     public User(String userName, String password, Set<RoleModel> roles) {
-        this.userName = userName;
+        this.username = userName;
         this.password = password;
         this.roles = roles;
     }
 
     public User() {}
-
-    public String getUserName() { return userName; }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() { return roles; }
@@ -44,7 +42,7 @@ public class User implements UserDetails {
     public String getPassword() { return password; }
 
     @Override
-    public String getUsername() { return userName; }
+    public String getUsername() { return username; }
 
     @Override
     public boolean isAccountNonExpired() { return true; }
