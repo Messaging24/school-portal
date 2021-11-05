@@ -1,7 +1,10 @@
 package com.jm.project.schooljournal.model;
 
+
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Set;
@@ -12,9 +15,13 @@ import java.util.UUID;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue
-    @Column(name = "uuid")
-    private UUID uuid;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
+    @Column(name = "id", updatable = false, nullable = false)
+    private UUID id;
 
     @Column(name = "username")
     private String username;
@@ -23,7 +30,8 @@ public class User implements UserDetails {
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "roles_id"))
     private Set<RoleModel> roles;
 
@@ -33,26 +41,42 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
-    public User() {}
+    public User() {
+    }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() { return roles; }
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return roles;
+    }
 
     @Override
-    public String getPassword() { return password; }
+    public String getPassword() {
+        return password;
+    }
 
     @Override
-    public String getUsername() { return username; }
+    public String getUsername() {
+        return username;
+    }
 
     @Override
-    public boolean isAccountNonExpired() { return true; }
+    public boolean isAccountNonExpired() {
+        return true;
+    }
 
     @Override
-    public boolean isAccountNonLocked() { return true; }
+    public boolean isAccountNonLocked() {
+        return true;
+    }
 
     @Override
-    public boolean isCredentialsNonExpired() { return true; }
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
 
     @Override
-    public boolean isEnabled() { return true; }
+    public boolean isEnabled() {
+        return true;
+    }
+
 }
