@@ -11,7 +11,7 @@ import java.util.Set;
 import java.util.UUID;
 
 @Entity
-@Table(name = "user")
+@Table(name = "userjournal")
 public class User implements UserDetails {
 
     @Id
@@ -30,8 +30,8 @@ public class User implements UserDetails {
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
+    @JoinTable(name = "userjournal_roles",
+            joinColumns = @JoinColumn(name = "userjournal_id"),
             inverseJoinColumns = @JoinColumn(name = "roles_id"))
     private Set<RoleModel> roles;
 

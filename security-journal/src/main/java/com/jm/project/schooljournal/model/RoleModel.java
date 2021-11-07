@@ -22,7 +22,7 @@ public class RoleModel implements GrantedAuthority {
 
     @JsonIgnore
     @ManyToMany(mappedBy = "roles")
-    Set<User> user;
+    Set<User> userjournal;
 
     public RoleModel() {
     }
