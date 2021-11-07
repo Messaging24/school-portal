@@ -1,14 +1,16 @@
 package com.jm.project.schooljournal.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
-@Table(name = "users_role")
-public class RoleModel implements GrantedAuthority{
+@Table(name = "roles")
+public class RoleModel implements GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +19,10 @@ public class RoleModel implements GrantedAuthority{
 
     @Column(name = "role")
     private String role;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "roles")
+    Set<User> user;
 
     public RoleModel() {
     }

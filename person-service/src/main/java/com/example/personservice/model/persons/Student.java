@@ -1,6 +1,7 @@
 package com.example.personservice.model.persons;
 
 import com.example.personservice.model.schoolattributes.Form;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
@@ -15,6 +16,12 @@ public class Student extends Person {
     @OneToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     public Form form;
+
+    // присоединяем к родителю
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "parent_id", referencedColumnName = "parentId")
+    @JsonIgnoreProperties("studentsList")
+    private Parent parent;
 
     public Student() {
     }

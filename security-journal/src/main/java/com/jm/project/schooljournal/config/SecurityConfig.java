@@ -38,7 +38,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // TODO configure web security
+        http
+                .cors()
+                .and()
+                .csrf().disable()
+//                    .exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
+//                    .and()
+//                    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                    .and()
+//                .addFilter(new AuthenticationFilter(authenticationManager()))
+//                    .addFilter(new AuthorizationFilter(authenticationManagerBean(), userRepository))
+                .authorizeRequests()
+                .antMatchers("/auth/signin", "/auth/refresh", "/api/public/**").permitAll()
+                .antMatchers("/api/user/**").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/api/admin/**").hasRole("ADMIN")
+                .anyRequest().authenticated();
     }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(8);
