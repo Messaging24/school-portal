@@ -30,7 +30,7 @@ public class Parent extends Person {
     public Parent() {
     }
 
-    public Parent(String firstName, String lastName, String secondName, char gender, int age, List studentsList) {
+    public Parent(String firstName, String lastName, String secondName, char gender, int age, List<Student> studentsList) {
         super(firstName, lastName, secondName, gender, age);
         this.studentsList = studentsList;
     }
