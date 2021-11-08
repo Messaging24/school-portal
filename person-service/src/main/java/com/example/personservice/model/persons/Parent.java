@@ -3,21 +3,22 @@ package com.example.personservice.model.persons;
 //TODO унаследовать от Person
 //  Добавить связку родитель ученик (OneToMany)
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "parents")
+@Table(name = "parent")
 public class Parent extends Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long parentId;
 
-    @OneToMany(mappedBy = "id",
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
+    @OneToMany(targetEntity = Student.class, mappedBy = "parent", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("parent")
     private List<Student> studentsList;
 
     public Parent() {
@@ -28,12 +29,12 @@ public class Parent extends Person {
         this.studentsList = studentsList;
     }
 
-    public Long getId() {
-        return id;
+    public Long getParentId() {
+        return parentId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setParentId(Long id) {
+        this.parentId = id;
     }
 
     public List<Student> getStudentsList() {

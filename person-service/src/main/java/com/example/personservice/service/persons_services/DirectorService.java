@@ -15,7 +15,8 @@ public interface DirectorService {
     Director getDirectorById(long id);
 
     // TODO: 25.10.2021   вынести поиск директора по уникальному имени в отдельную задачу.
-    Director getDirectorByFirstName(String name);
+
+    Director getDirectorByFirstName(String firstName);
 
     List<Director> getAllDirectors();
 
