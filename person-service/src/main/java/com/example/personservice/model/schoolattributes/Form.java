@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "Forms")
+@Table(name = "forms")
 public class Form {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,33 +16,53 @@ public class Form {
     private Long id;
 
     @Column(name = "number")
-    private int number; //1-11
+    private int number;
+    //1-11
 
     @Column(name = "name")
-    private String name; //А, Б, В, Г, Д
+    private String name;
+    //А, Б, В, Г, Д
 
     @Column(name = "form_name")
-    private String formName; //number + name: 1А, 2Б....
+    private String formName;
+    //number + name: 1А, 2Б....
 
     @Column(name = "profile")
+    @Enumerated(EnumType.STRING)
     private Profile profile;
+    //Профиль обучения
 
     @Column(name = "items_list")
+    @Enumerated
+    @ElementCollection(targetClass = Items.class)
     private List<Items> itemsList;
+    //Список изучаемых предметов
 
     @Column(name = "students_list")
+    @OneToMany(targetEntity = Student.class,
+            mappedBy = "parent",
+            cascade = {CascadeType.DETACH,
+                    CascadeType.MERGE,
+                    CascadeType.REFRESH,
+                    CascadeType.PERSIST},
+            fetch = FetchType.LAZY)
     private List<Student> studentsList;
+    //Список студентов
 
-    @Column(name = "teacher")
+    @OneToOne(cascade = {CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.PERSIST},
+            fetch = FetchType.LAZY)
+    //cascade - При удалении класса не удалять связанный объект учителя
+    @JoinColumn(name = "teacher_id")
     private Teacher teacher;
-
-    @Column(name = "school")
-    private School school;
+    //Классный руководитель
 
     public Form() {
     }
 
-    public Form(Long id, int number, String name, String formName, Profile profile, List<Items> itemsList, List<Student> studentsList, Teacher teacher, School school) {
+    public Form(Long id, int number, String name, String formName, Profile profile, List<Items> itemsList, List<Student> studentsList, Teacher teacher) {
         this.id = id;
         this.number = number;
         this.name = name;
@@ -51,7 +71,6 @@ public class Form {
         this.itemsList = itemsList;
         this.studentsList = studentsList;
         this.teacher = teacher;
-        this.school = school;
     }
 
     public Long getId() {
@@ -116,14 +135,6 @@ public class Form {
 
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
-    }
-
-    public School getSchool() {
-        return school;
-    }
-
-    public void setSchool(School school) {
-        this.school = school;
     }
 
     @Override
