@@ -15,7 +15,6 @@ public class TeacherController {
 
     TeacherService teacherService;
 
-    @Autowired
     public TeacherController(TeacherService teacherService) {
         this.teacherService = teacherService;
     }
