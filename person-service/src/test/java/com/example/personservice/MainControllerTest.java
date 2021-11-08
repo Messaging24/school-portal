@@ -6,6 +6,7 @@
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 //import org.springframework.boot.test.context.SpringBootTest;
+//import org.springframework.test.context.TestPropertySource;
 //import org.springframework.test.context.junit4.SpringRunner;
 //import org.springframework.test.web.servlet.MockMvc;
 //import org.springframework.test.web.servlet.RequestBuilder;
@@ -24,31 +25,9 @@
 //@RunWith(SpringRunner.class)
 //@SpringBootTest
 //@AutoConfigureMockMvc
-//class PersonServiceApplicationTests {
-//
-//    @Autowired
-//    private MockMvc mockMvc;
-//
-//    @Test
-//    void contextLoads() {
-//    }
-//
-//    @Test
-//    public void saveUser() throws Exception {
-//        this.mockMvc.perform(post("/director").param("Ivan", "Ivanovich",
-//                        "Ivanov", "33", "M", "2021", "2022"))
-//                .andDo(print())
-//                .andExpect(status().isOk());
+////@ContextConfiguration
+//@TestPropertySource("/application-test.properties")
+//public class MainControllerTest {
 //
 //
-////    @Test
-////    void test() throws Exception {
-////        this.mockMvc.perform(get("/director/alldirectors"))
-////                .andDo(print())
-////                .andExpect(status().isOk())
-////                .andExpect(content().json({}));
-////    }
-//
-//    }
 //}
-//

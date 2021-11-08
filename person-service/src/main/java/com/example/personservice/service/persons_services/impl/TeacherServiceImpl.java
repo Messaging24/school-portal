@@ -4,8 +4,11 @@ import com.example.personservice.model.persons.Teacher;
 import com.example.personservice.repository.persons_repository.TeacherRepository;
 import com.example.personservice.service.persons_services.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
+@Service
 public class TeacherServiceImpl implements TeacherService {
 
     TeacherRepository teacherRepository;
@@ -37,7 +40,7 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public Teacher getTeacherByName(String name) {
-        return teacherRepository.findTeacherByName(name);
+        return teacherRepository.findTeacherByFirstName(name);
     }
 
     @Override
