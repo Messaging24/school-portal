@@ -1,6 +1,6 @@
 package com.example.personservice.controller;
 import com.example.personservice.model.schoolattributes.School;
-import com.example.personservice.service.SchoolService;
+import com.example.personservice.service.schoolatribute_services.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
