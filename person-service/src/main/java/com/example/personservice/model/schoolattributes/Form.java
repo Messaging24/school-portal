@@ -10,6 +10,9 @@ import java.util.List;
 @Entity
 @Table(name = "forms")
 public class Form {
+
+    private final int max_capacity = 1320;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
