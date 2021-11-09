@@ -1,4 +1,6 @@
 import { Avatar, Button, Card, Comment, Rate, Tabs } from "antd";
+import { useLocation } from "react-router";
+import { Link } from "react-router-dom";
 
 import './school-page.scss'
 
@@ -15,6 +17,8 @@ const commentsArr = [
 
 const SchoolPage = ({school}:{school:string}) => {
 
+    const location = useLocation()
+    console.log(location)
     const { TabPane } = Tabs;
 
     const comments = commentsArr
@@ -40,7 +44,9 @@ const SchoolPage = ({school}:{school:string}) => {
                             <div className="info-upper">
                                 <div className="info-text">
                                     <h3>{school}</h3>
-                                    <p>Директор</p>
+                                    <Link to={location.pathname+'/director'}>
+                                        <p>Директор</p>
+                                    </Link>
                                     <p>Дата основания</p>
                                     <p>Адрес</p>
                                     <p>Контакты</p>

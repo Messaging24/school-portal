@@ -2,6 +2,7 @@
 import { connect } from 'react-redux';
 import {BrowserRouter as Router, Redirect, Route} from 'react-router-dom'
 import { stateFromStore, user } from '../../typescript/types';
+import DirectorCard from '../director-card';
 
 
 
@@ -40,6 +41,12 @@ function App({isLoggedIn, currentUser}:
           const {school} = obj.match.params;
           return (
             <SchoolPage school={school}/>
+          )
+        }}/>
+        <Route path="/schools/:school/director" exact render={(obj:any) => {
+          const {school} = obj.match.params;
+          return (
+            <DirectorCard school={school}/>
           )
         }}/>
         <Route path="/sign-in" exact component={SignIn}/>
