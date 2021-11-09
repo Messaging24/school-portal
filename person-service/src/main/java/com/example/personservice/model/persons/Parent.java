@@ -16,15 +16,21 @@ public class Parent extends Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long parentId;
 
-    @OneToMany(targetEntity = Student.class, mappedBy = "parent", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(targetEntity = Student.class,
+            mappedBy = "parent",
+            fetch = FetchType.LAZY,
+            cascade = {CascadeType.DETACH,
+                    CascadeType.MERGE,
+                    CascadeType.REFRESH,
+                    CascadeType.PERSIST}, //Исключил remove, что бы не удалять связанные сущности
+            orphanRemoval = true)
     @JsonIgnoreProperties("parent")
     private List<Student> studentsList;
 
     public Parent() {
     }
 
-    public Parent(String firstName, String lastName, String secondName, char gender, int age, List studentsList) {
+    public Parent(String firstName, String lastName, String secondName, char gender, int age, List<Student> studentsList) {
         super(firstName, lastName, secondName, gender, age);
         this.studentsList = studentsList;
     }
