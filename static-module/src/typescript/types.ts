@@ -9,6 +9,7 @@ export interface appState {
     currentUser: user,
     serverErrors: string[] | false,
     city: string | false,
+    token: string | false,
 }
 
 export interface lcPageState {
@@ -19,7 +20,6 @@ export interface lcPageState {
 export interface user {
     position: string,
     login: string,
-    name: string,
 }
 
 export interface person {

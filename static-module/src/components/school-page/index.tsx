@@ -1,8 +1,9 @@
-import { Avatar, Button, Card, Comment, Rate, Tabs } from "antd";
+import { Avatar, Card, Comment, Rate, Tabs } from "antd";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 
 import './school-page.scss'
+import VacantForms from "./VacantForms";
 
 const commentsArr = [
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin hendrerit in nibh iaculis scelerisque. Donec efficitur ligula ex, quis mollis mi luctus vel. Phasellus mattis ac dui id mattis. Nulla porttitor enim semper purus commodo ornare. Donec vel diam lorem. Aliquam aliquam non nisi et tristique. Fusce lobortis, enim et faucibus blandit, sem justo malesuada arcu, vel hendrerit sem est at tellus.',
@@ -18,7 +19,6 @@ const commentsArr = [
 const SchoolPage = ({school}:{school:string}) => {
 
     const location = useLocation()
-    console.log(location)
     const { TabPane } = Tabs;
 
     const comments = commentsArr
@@ -56,14 +56,13 @@ const SchoolPage = ({school}:{school:string}) => {
                                     <Rate disabled defaultValue={2}/>
                                 </div>
                             </div>
-                            <Button type="primary">Подать заявление</Button>
                         </div>
                         <Tabs defaultActiveKey="1" centered>
                             <TabPane tab="Отзывы" key="1">
                                 {comments}
                             </TabPane>
                             <TabPane tab="Свободные места" key="2">
-                                content of tab 2
+                                <VacantForms/>
                             </TabPane>
                         </Tabs>
                     </section>
