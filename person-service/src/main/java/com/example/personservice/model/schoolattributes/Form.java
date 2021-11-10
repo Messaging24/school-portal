@@ -1,8 +1,9 @@
 package com.example.personservice.model.schoolattributes;
 
+import com.example.personservice.enums.Items;
 import com.example.personservice.model.persons.Student;
 import com.example.personservice.model.persons.Teacher;
-import com.example.personservice.profile.Profile;
+import com.example.personservice.enums.Profile;
 
 import javax.persistence.*;
 import java.util.List;
