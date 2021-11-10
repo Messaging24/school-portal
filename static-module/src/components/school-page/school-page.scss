@@ -45,8 +45,18 @@
     .ant-card-body {
         display: flex;
 
+        .ant-tabs {
+            p {
+                font-size: 1rem;
+            }
+            span {
+                font-size: 1rem;
+            }
+        }
 
-        
+        .ant-tabs-tab-btn {
+            font-size: 1rem;
+        }
 
         .school-info--right {
             
@@ -59,8 +69,17 @@
                 display: flex;
                 justify-content: space-between;
 
+                .info-text {
+                    width: 100%;
+                }
+
                 h3 {
+                    text-align: center;
                     font-size: 1.5rem;
+                }
+
+                p {
+                    font-size: 1rem;
                 }
                 
 
@@ -79,16 +98,67 @@
                 border-radius: 5px;
             }
 
-            button {
-                height: 60px;
-                width: 400px;
-                border-radius: 5px;
+            .vacant-numbers {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                padding-bottom: 1rem;
+                margin-bottom: 1rem;
+                border-bottom: 3px solid #e5e5e5;
 
-                span {
-                    font-size: 1.25rem;
-                    color: #fff;
+                button {
+                    width: 8rem;
+                    height: 3rem;
+                    margin: 0.5rem 0.5rem;
+                    border-radius: 10px;
+                    
+                    span {
+                        font-size: 1rem;
+                        font-weight: 700;
+                        color: #1890FF;
+                        line-height: 2rem;
+                    }
                 }
-                
+
+                .ant-btn-primary {
+                    span {
+                        color: #fff;
+                    }
+                }
+
+                .ant-btn:disabled {
+                    span {
+                        color: #999;
+                    }
+                }
+            }
+
+            .ant-card-body {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                h4 {
+                    text-align: center;
+                    font-size: 1.5rem;
+                }
+
+                p {
+                    font-size: 1rem;
+                }
+
+                .apply-btn {
+                    height: 60px;
+                    width: 400px;
+                    border-radius: 40px;
+                    margin: auto;
+    
+                    span {
+                        font-size: 1.25rem;
+                        color: #fff;
+                    }
+                    
+                }
             }
         }
     }

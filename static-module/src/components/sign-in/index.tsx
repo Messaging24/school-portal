@@ -6,21 +6,24 @@ import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import { AnyAction, bindActionCreators, Dispatch } from "redux";
 import { stateFromStore, user } from "../../typescript/types";
-import { setIsLoggedIn } from "../app/appSlice";
+import { setIsLoggedIn, signIn } from "../app/appSlice";
 
 import './sign-in.scss'
 
-const SignIn = ({serverErrors, currentUser, setIsLoggedIn}:
+const SignIn = ({serverErrors, currentUser, setIsLoggedIn, signIn}:
     {
         serverErrors: string[] | false,
         currentUser: user,
         setIsLoggedIn: any,
+        signIn: any,
     }
     ) => {
     const { register, handleSubmit, formState: { errors }} = useForm();
     const [success, setSuccess] = useState(false)
 
     const onSubmit = (data:any) => {
+        console.log('Send', data)
+        signIn(data)
         !serverErrors && setSuccess(true) 
       };
 
@@ -42,7 +45,7 @@ const SignIn = ({serverErrors, currentUser, setIsLoggedIn}:
                                 className={errors.login ? 'text-input input--error' : 'text-input'}
                                 type="text" 
                                 placeholder="Логин"
-                                {...register("login", {
+                                {...register("username", {
                                     required: 'Логин не может быть пустым',
                                 })} 
                             />
@@ -75,9 +78,10 @@ const mapState = (state:stateFromStore) => ({
 })
 
 const mapDispatch = (dispatch: Dispatch<AnyAction>) => {
-    const bound = bindActionCreators({setIsLoggedIn}, dispatch);
+    const bound = bindActionCreators({setIsLoggedIn, signIn}, dispatch);
     return {
         setIsLoggedIn: bound.setIsLoggedIn,
+        signIn: bound.signIn,
     }
 }
 

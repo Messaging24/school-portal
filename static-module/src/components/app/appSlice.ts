@@ -1,16 +1,22 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { appState } from '../../typescript/types'
+import appService from '../../services/appService'
 
 const initialState: appState = {
   isLoggedIn: false,
   currentUser: {
     position: 'director',
     login: 'test',
-    name: 'any'
   },
   serverErrors: false,
   city: false,
+  token: false,
 }
+
+export const signIn = createAsyncThunk('app/signin', async(data:{username:string, password: string}) => {
+  const res = await appService.signIn(data)
+  return res
+  })
 
 const appSlice = createSlice({
   name: 'app',
@@ -23,7 +29,18 @@ const appSlice = createSlice({
       state.isLoggedIn = action.payload
     },
   },
-  extraReducers: {
+  extraReducers(builder) {
+    builder
+      .addCase(signIn.fulfilled, (state, action) => {
+        console.log('success', action.payload)
+        state.token = action.payload.accessToken
+      })
+      .addCase(signIn.pending, (state, action) => {
+        console.log('loading')
+      })
+      .addCase(signIn.rejected, (state, action) => {
+        console.log('rejected')
+      })
   },
 })
 

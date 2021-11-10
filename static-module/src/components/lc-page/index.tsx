@@ -12,9 +12,11 @@ import './lc-page.scss'
 const LcPage = ({
         pageId,
         currentUser,
+        token,
     }:{
         pageId:string,
         currentUser:user,
+        token:string | false,
     }) => {
         const {position} = currentUser
         const isCorrect = pageId === position
@@ -56,6 +58,7 @@ const LcPage = ({
 
 const mapState = (state:stateFromStore) => ({
     currentUser: state.app.currentUser,
+    token: state.app.token,
 })
 
 export default connect(mapState)(LcPage)
