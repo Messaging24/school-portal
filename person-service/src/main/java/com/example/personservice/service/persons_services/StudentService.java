@@ -1,6 +1,7 @@
 package com.example.personservice.service.persons_services;
 
 import com.example.personservice.model.persons.Student;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
