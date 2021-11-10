@@ -4,6 +4,7 @@ import com.example.personservice.model.schoolattributes.School;
 import com.example.personservice.repository.schoolatribute_repository.SchoolRepository;
 import com.example.personservice.service.schoolatribute_services.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 

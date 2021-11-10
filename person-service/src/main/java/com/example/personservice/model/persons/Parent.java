@@ -3,37 +3,44 @@ package com.example.personservice.model.persons;
 //TODO унаследовать от Person
 //  Добавить связку родитель ученик (OneToMany)
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "parents")
+@Table(name = "parent")
 public class Parent extends Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long parentId;
 
-    @OneToMany(mappedBy = "id",
+    @OneToMany(targetEntity = Student.class,
+            mappedBy = "parent",
             fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL,
+            cascade = {CascadeType.DETACH,
+                    CascadeType.MERGE,
+                    CascadeType.REFRESH,
+                    CascadeType.PERSIST}, //Исключил remove, что бы не удалять связанные сущности
             orphanRemoval = true)
+    @JsonIgnoreProperties("parent")
     private List<Student> studentsList;
 
     public Parent() {
     }
 
-    public Parent(String firstName, String lastName, String secondName, char gender, int age, List studentsList) {
+    public Parent(String firstName, String lastName, String secondName, char gender, int age, List<Student> studentsList) {
         super(firstName, lastName, secondName, gender, age);
         this.studentsList = studentsList;
     }
 
-    public Long getId() {
-        return id;
+    public Long getParentId() {
+        return parentId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setParentId(Long id) {
+        this.parentId = id;
     }
 
     public List<Student> getStudentsList() {

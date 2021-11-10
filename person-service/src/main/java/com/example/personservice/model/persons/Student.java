@@ -1,6 +1,7 @@
 package com.example.personservice.model.persons;
 
 import com.example.personservice.model.schoolattributes.Form;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
@@ -12,24 +13,50 @@ public class Student extends Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+    //присоединяем к классу
+    @ManyToOne(cascade = {CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.PERSIST},
+            fetch = FetchType.LAZY)
+    //@PrimaryKeyJoinColumn //Первичный ключ student используется в Form
+    @JoinColumn(name = "form_id", referencedColumnName = "id")
+    @JsonIgnoreProperties("studentsList")
     public Form form;
+
+    // присоединяем к родителю
+    @ManyToOne(cascade = {CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.PERSIST}, //Исключил remove, что бы не удалять связанные сущности
+            fetch = FetchType.LAZY)
+    @JoinColumn(name = "parent_id", referencedColumnName = "parentId")
+    @JsonIgnoreProperties("studentsList")
+    private Parent parent;
 
     public Student() {
     }
 
-    public Student(String firstName, String secondName, String lastName, char gender, int age, Form form) {
+    public Student(String firstName, String secondName, String lastName, char gender, int age, Form form, Parent parent) {
         super(firstName, secondName, lastName, gender, age);
         this.form = form;
+        this.parent = parent; //Добавил на задаче 3064 + сеттер и геттер
     }
 
     public Form getForm() {
         return form;
     }
 
-    public void setForm(Form school_class) {
-        this.form = school_class;
+    public void setForm(Form form) {
+        this.form = form;
+    }
+
+    public Parent getParent() {
+        return parent;
+    }
+
+    public void setParent(Parent parent) {
+        this.parent = parent;
     }
 
     @Override
@@ -81,4 +108,6 @@ public class Student extends Person {
     public void setGender(char gender) {
         super.setGender(gender);
     }
+
+
 }
