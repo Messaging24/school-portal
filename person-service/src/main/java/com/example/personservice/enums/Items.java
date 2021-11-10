@@ -1,4 +1,4 @@
-package com.example.personservice.model.schoolattributes;
+package com.example.personservice.enums;
 
 public enum Items {
     CALLIGRAPHY,                          // Чистописание

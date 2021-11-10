@@ -1,4 +1,4 @@
-package com.example.personservice.profile;
+package com.example.personservice.enums;
 
 public enum Profile {
 
