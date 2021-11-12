@@ -3,13 +3,15 @@ package com.jm.project.schooljournal.payload.response;
 import java.util.List;
 
 public class AuthenticationResponse {
-
     private String username;
     private List<String> roles;
     private String accessToken;
     private String refreshToken;
 
-    public AuthenticationResponse(String username, List<String> roles, String accessToken, String refreshToken) {
+    public AuthenticationResponse(String username,
+                                  List<String> roles,
+                                  String accessToken,
+                                  String refreshToken) {
         this.username = username;
         this.roles = roles;
         this.accessToken = accessToken;
