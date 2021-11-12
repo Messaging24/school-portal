@@ -1,15 +1,15 @@
 package com.jm.project.schooljournal.security.filter;
 
+import com.jm.project.schooljournal.exception.NotFoundException;
 import com.jm.project.schooljournal.model.User;
 import com.jm.project.schooljournal.repository.UserRepository;
 import com.jm.project.schooljournal.security.jwt.JwtProperties;
 import com.jm.project.schooljournal.security.jwt.JwtUtil;
 import org.springframework.http.HttpHeaders;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -17,13 +17,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class AuthorizationFilter extends BasicAuthenticationFilter {
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final UserRepository userRepository;
 
-    public AuthorizationFilter(AuthenticationManager authenticationManager,
-                               UserRepository userRepository) {
-        super(authenticationManager);
+    public JwtAuthenticationFilter(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -32,6 +30,7 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain)
             throws ServletException, IOException {
+
         String header = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (header == null || !header.startsWith(JwtProperties.TOKEN_PREFIX)) {
             filterChain.doFilter(request, response);
@@ -47,15 +46,15 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
                 .replace(JwtProperties.TOKEN_PREFIX, "");
         if (!token.isEmpty()) {
             String username = JwtUtil.getUsernameFromToken(token);
-            if (username != null) {
-                User userDetails = userRepository.findUserByUsername(username);
-                return new UsernamePasswordAuthenticationToken(
-                        userDetails.getUsername(),
-                        null,
-                        userDetails.getAuthorities()
-                );
+            User user = userRepository.findUserByUsername(username);
+            if (user == null) {
+                throw new NotFoundException("User not found - " + username);
             }
-            return null;
+            return new UsernamePasswordAuthenticationToken(
+                    user.getUsername(),
+                    null,
+                    user.getAuthorities()
+            );
         }
         return null;
     }

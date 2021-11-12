@@ -26,11 +26,11 @@ public class JwtUtil {
                 .sign(Algorithm.HMAC512(JwtProperties.SECRET.getBytes()));
     }
 
-    public static String generateRefreshToken(User user) {
-         return JWT.create()
-                .withSubject(user.getUsername())
+    public static String generateTokenByUsername(String username) {
+        return JWT.create()
+                .withSubject(username)
                 .withExpiresAt(new Date(System.currentTimeMillis() +
-                        JwtProperties.REFRESH_TOKEN_EXPIRATION))
+                        JwtProperties.ACCESS_TOKEN_EXPIRATION))
                 .sign(Algorithm.HMAC512(JwtProperties.SECRET.getBytes()));
     }
 }

@@ -2,7 +2,7 @@ package com.jm.project.schooljournal.security;
 
 import com.jm.project.schooljournal.model.User;
 import com.jm.project.schooljournal.repository.UserRepository;
-import com.jm.project.schooljournal.security.filter.AuthorizationFilter;
+import com.jm.project.schooljournal.security.filter.JwtAuthenticationFilter;
 import com.jm.project.schooljournal.security.handler.AuthEntryPoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,8 +13,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -52,10 +52,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .addFilter(new AuthorizationFilter(authenticationManagerBean(), userRepository))
+                .addFilterBefore(new JwtAuthenticationFilter(userRepository),
+                        UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers("/auth/signin", "/auth/refresh", "/api/public/**").permitAll()
-                .antMatchers("/api/user/**").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/api/public", "/auth/**").permitAll()
+                .antMatchers("/api/user/**").hasRole("USER")
                 .antMatchers("/api/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated();
     }

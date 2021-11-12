@@ -1,71 +1,28 @@
 package com.jm.project.schooljournal.controller;
 
-import com.jm.project.schooljournal.config.jwt.JwtUtils;
-import com.jm.project.schooljournal.model.User;
-import com.jm.project.schooljournal.repository.UserRepository;
-import com.jm.project.schooljournal.security.jwt.JwtProperties;
-import com.jm.project.schooljournal.security.jwt.JwtUtil;
-import com.jm.project.schooljournal.security.request.SignInRequest;
-import com.jm.project.schooljournal.security.response.RefreshTokenResponse;
-import com.jm.project.schooljournal.security.response.SignInResponse;
-import org.springframework.http.HttpHeaders;
+import com.jm.project.schooljournal.payload.request.LoginRequest;
+import com.jm.project.schooljournal.payload.request.RefreshTokenRequest;
+import com.jm.project.schooljournal.service.AuthService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
-    private final UserRepository userRepository;
-    private final AuthenticationManager authenticationManager;
+    private final AuthService authService;
 
-    public AuthController(UserRepository userRepository,
-                          AuthenticationManager authenticationManager) {
-        this.userRepository = userRepository;
-        this.authenticationManager = authenticationManager;
+    public AuthController(AuthService authService) {
+        this.authService = authService;
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<?> signIn(@RequestBody SignInRequest request) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getUsername(),
-                        request.getPassword()
-                ));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        User user = (User) authentication.getPrincipal();
-        String accessToken = JwtUtil.generateToken(user);
-        String refreshToken = JwtUtil.generateRefreshToken(user);
-        List<String> roles = user.getAuthorities().stream()
-                .map(role -> role.getAuthority().substring(5))
-                .collect(Collectors.toList());
-        return ResponseEntity.ok(new SignInResponse(
-                user.getUsername(), roles, accessToken, refreshToken
-        ));
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+        return ResponseEntity.ok(authService.login(loginRequest));
     }
 
-    @GetMapping("/refresh")
-    public ResponseEntity<?> refreshToken(HttpServletRequest request) {
-        String token = request.getHeader(HttpHeaders.AUTHORIZATION)
-                .replace(JwtProperties.TOKEN_PREFIX, "");
-        if (!token.isEmpty()) {
-            String username = JwtUtil.getUsernameFromToken(token);
-            if (username != null) {
-                User userDetails = userRepository.findUserByUsername(username);
-                String newAccessToken = JwtUtil.generateToken(userDetails);
-                return ResponseEntity.ok(new RefreshTokenResponse(newAccessToken));
-            }
-            return ResponseEntity.badRequest().body(HttpServletResponse.SC_FORBIDDEN);
-        }
-        return ResponseEntity.badRequest().body(HttpServletResponse.SC_BAD_REQUEST);
+    @PostMapping("/refresh/token")
+    public ResponseEntity<?> refreshToken(@RequestBody RefreshTokenRequest refreshTokenRequest) {
+        return ResponseEntity.ok(authService.refreshToken(refreshTokenRequest));
     }
 }

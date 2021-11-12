@@ -1,6 +1,6 @@
-package com.jm.project.schooljournal.security.request;
+package com.jm.project.schooljournal.payload.request;
 
-public class SignInRequest {
+public class LoginRequest {
 
     private String username;
     private String password;
