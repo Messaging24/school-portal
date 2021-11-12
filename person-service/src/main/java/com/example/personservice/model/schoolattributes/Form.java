@@ -21,47 +21,39 @@ public class Form {
 
     @Column(name = "number")
     private int number;
-    //1-11
 
     @Column(name = "name")
     private String name;
-    //А, Б, В, Г, Д
 
     @Column(name = "form_name")
     private String formName;
-    //number + name: 1А, 2Б....
 
     @Column(name = "profile")
-    @Enumerated(EnumType.STRING)
+    //@Enumerated(EnumType.STRING)
     private Profile profile;
-    //Профиль обучения
 
     @Column(name = "items_list")
-    @Enumerated
+    //@Enumerated
     @ElementCollection(targetClass = Items.class)
     private List<Items> itemsList;
-    //Список изучаемых предметов
 
     @Column(name = "students_list")
     @OneToMany(targetEntity = Student.class,
-            mappedBy = "parent",
+            mappedBy = "form",
             cascade = {CascadeType.DETACH,
                     CascadeType.MERGE,
                     CascadeType.REFRESH,
                     CascadeType.PERSIST},
             fetch = FetchType.LAZY)
     private List<Student> studentsList;
-    //Список студентов
 
     @OneToOne(cascade = {CascadeType.DETACH,
             CascadeType.MERGE,
             CascadeType.REFRESH,
             CascadeType.PERSIST},
             fetch = FetchType.LAZY)
-    //cascade - При удалении класса не удалять связанный объект учителя
     @JoinColumn(name = "teacher_id")
     private Teacher teacher;
-    //Классный руководитель
 
     public Form() {
     }
